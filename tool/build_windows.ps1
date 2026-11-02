@@ -29,8 +29,10 @@ try {
         throw 'Build this package on Windows with Flutter and Visual Studio C++ tools installed.'
     }
 
-    $flutter = (Get-Command flutter -CommandType Application -ErrorAction Stop).Source
-    $dart = (Get-Command dart -CommandType Application -ErrorAction Stop).Source
+    $flutter = (Get-Command flutter.bat -CommandType Application -ErrorAction Stop |
+        Select-Object -First 1).Source
+    $dart = (Get-Command dart.bat -CommandType Application -ErrorAction Stop |
+        Select-Object -First 1).Source
     if (-not (Test-Path -LiteralPath (Join-Path $projectRoot 'pubspec.yaml') -PathType Leaf)) {
         throw 'Cannot find pubspec.yaml next to the tool directory.'
     }
