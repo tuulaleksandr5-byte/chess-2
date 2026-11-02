@@ -366,7 +366,10 @@ void main() {
     const b = ChessMove(from: 12, to: 32);
     expect(a, b);
     expect(a.hashCode, b.hashCode);
-    expect(Set<ChessMove>.of([a, b]).length, 1);
+    final equalMoves = <ChessMove>{};
+    equalMoves.add(a);
+    equalMoves.add(b);
+    expect(equalMoves.length, 1);
     expect(a, isNot(const ChessMove(from: 12, to: 32, enPassant: true)));
     final p = position({0: wk, 99: bk, 85: wp,
       96: const Piece(Side.black, PieceType.rook)});
