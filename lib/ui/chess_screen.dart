@@ -125,7 +125,9 @@ class _ChessScreenState extends State<ChessScreen> {
         final generation = _generation;
         final position = _position;
         final promotion = await choosePromotion(context, _position.turn);
-        if (!mounted || promotion == null || generation != _generation || !identical(position, _position)) return;
+        if (!mounted || promotion == null || generation != _generation || !identical(position, _position)) {
+          return;
+        }
         move = available.firstWhere((candidate) => candidate.promotion == promotion);
       }
       _applyMove(move);
@@ -149,7 +151,9 @@ class _ChessScreenState extends State<ChessScreen> {
   }
 
   Future<void> _scheduleBot() async {
-    if (!mounted || !_versusBot || _position.turn != Side.black || _result != null || _botThinking) return;
+    if (!mounted || !_versusBot || _position.turn != Side.black || _result != null || _botThinking) {
+      return;
+    }
     final generation = ++_generation;
     final position = _position;
     setState(() {
@@ -188,7 +192,9 @@ class _ChessScreenState extends State<ChessScreen> {
     }
     if (_botThinking) return 'Бот обдумывает ход';
     if (_botError) return 'Не удалось получить ход бота';
-    if (_inCheck) return _position.turn == Side.white ? 'Шах белому королю' : 'Шах чёрному королю';
+    if (_inCheck) {
+      return _position.turn == Side.white ? 'Шах белому королю' : 'Шах чёрному королю';
+    }
     return _position.turn == Side.white ? 'Ход белых' : 'Ход чёрных';
   }
 
