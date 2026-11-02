@@ -47,7 +47,7 @@ try {
     Invoke-Checked -Executable $dart -ArgumentList @('format', 'lib', 'test', 'tool')
     Invoke-Checked -Executable $flutter -ArgumentList @('analyze')
     Invoke-Checked -Executable $flutter -ArgumentList @('test')
-    Invoke-Checked -Executable $flutter -ArgumentList @('build', 'windows', '--release', '--target-platform', 'windows-x64')
+    Invoke-Checked -Executable $flutter -ArgumentList @('build', 'windows', '--release')
 
     $releaseDirectory = Join-Path $projectRoot 'build/windows/x64/runner/Release'
     foreach ($requiredFile in @('chess_2.exe', 'flutter_windows.dll', 'data/icudtl.dat')) {
