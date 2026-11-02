@@ -1,0 +1,38 @@
+name: Windows release ZIP
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    name: Build and package Windows x64
+    runs-on: windows-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Check, build, and package the complete Windows app
+        run: ./tool/build_windows.ps1
+      - name: Upload Windows ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: Chess-2-Windows-x64
+          path: dist/Chess-2-Windows-x64.zip
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0

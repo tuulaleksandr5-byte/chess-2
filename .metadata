@@ -1,0 +1,14 @@
+# Flutter project metadata. Regenerate with flutter create when upgrading the SDK.
+version:
+  channel: stable
+project_type: app
+migration:
+  platforms:
+    - platform: root
+    - platform: android
+    - platform: ios
+    - platform: windows
+    - platform: web
+  unmanaged_files:
+    - 'lib/main.dart'
+    - 'ios/Runner.xcodeproj/project.pbxproj'
